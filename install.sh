@@ -8,25 +8,22 @@ if test -d "$fsfoler"; then
   skdownload=1
   echo "Skipping fs Download"
 fi
-tarball="ubuntu-fs.tar.xz"
 if [ "$first" != 1 ]; then
-  if ! test -f $tarball; then
-    echo "Download File System. Please wait"
-    case `dpkg --print-architecture` in
-    aarch64)
-      arch="arm64";;
-    amd64)
-      arch="amd64";;
-    *)
-      echo "Unsuported Architecture"; exit 1;;
-    esac
-    wget "https://raw.githubusercontent.com/coderadu/Ubuntu/main/fs/ubuntu-fs-${arch}.tar.xz" -o $tarball
-  fi
+  echo "Download File System. Please wait"
+  case `dpkg --print-architecture` in
+  aarch64)
+    arch="arm64";;
+  amd64)
+    arch="amd64";;
+  *)
+    echo "Unsuported Architecture"; exit 1;;
+  esac
+  wget "https://raw.githubusercontent.com/coderadu/Ubuntu/main/fs/ubuntu-fs-${arch}.tar.xz"
   current=`pwd`
   mkdir -p "$fsfolder"
   cd "$fsfolder"
   echo "Decompressing..."
-  proot tar -xJf ${current}/${tarball}||:
+  proot tar -xJf ${current}/ubuntu-fs-${arch}.tar.xz||:
   cd "$current"
 fi
 
@@ -62,4 +59,5 @@ else
 fi
 EOF
 chmod +x $bin
+rm ubuntu-fs-${arch}.tar.xz
 echo "You can start Ubuntu with ./start.sh"
