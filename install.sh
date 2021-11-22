@@ -20,7 +20,7 @@ if [ "$first" != 1 ]; then
     *)
       echo "Unsuported Architecture"; exit 1;;
     esac
-    wget "https://raw.githubusercontent.com/coderadu/Ubuntu/master/fs/ubuntu-fs-${arch}.tar.xz" -o $tarball
+    wget "https://raw.githubusercontent.com/coderadu/Ubuntu/main/fs/ubuntu-fs-${arch}.tar.xz" -o $tarball
   fi
   current=`pwd`
   mkdir -p "$fsfolder"
